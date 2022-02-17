@@ -44,5 +44,10 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 \end{enumerate}
 
 ```{r tidy=TRUE}
-# Code
+# Steps:
+# 1. Create new Class for door
+# 2. Create general function for PlayGame
+# 3. Create class function for PlayGame.door
+# 4. Create Constructor and validator for door class.
+
 ```
