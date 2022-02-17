@@ -50,4 +50,26 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 # 3. Create class function for PlayGame.door
 # 4. Create Constructor and validator for door class.
 
+# CONSTRUCTOR AND VALIDATOR ----------------------------------------------------
+
+# Constructor
+new_door <- function(x) {
+  # Just in case someone does not input an integer. Probably could run the
+  # validate function within this function to make things smoother.
+  x <- as.integer(x)
+  
+  class(x) <- "door"
+  return(x)
+}
+
+# Validator
+validate_door <- function(x) {
+  if (!is.integer(x)) {
+    stop("Choice is not an integer, please input an integer")
+  }
+  
+  if (!(x %in% c(1L, 2L, 3L))) {
+    stop("Choice must be an inetger between 1 and 3")
+  }
+}
 ```
