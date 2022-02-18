@@ -72,4 +72,25 @@ validate_door <- function(x) {
     stop("Choice must be an inetger between 1 and 3")
   }
 }
+
+# METHOD -----------------------------------------------------------------------
+
+PlayGame <- function(x) {
+  UseMethod("PlayGame")
+}
+
+PlayGame.door <- function(x) {
+  winner <- sample(c(1L, 2L, 3L), 1)
+  
+  if (x == winner) {
+    print("Congratulations, you won!")
+  } else {
+    print("Sorry, better luck next time!")
+  }
+}
+
+test <- new_door(1L)
+validate_door(test)
+
+PlayGame(test)
 ```
