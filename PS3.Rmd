@@ -80,6 +80,9 @@ PlayGame <- function(x) {
 }
 
 PlayGame.door <- function(x) {
+  
+  # Made the random door choose from integers just in case some numerical
+  # error could show up otherwise
   winner <- sample(c(1L, 2L, 3L), 1)
   
   if (x == winner) {
