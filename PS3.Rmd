@@ -50,7 +50,10 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
 new_door <- function(x) {
   # Just in case someone does not input an integer. Probably could run the
   # validate function within this function to make things smoother.
-  x <- as.integer(x)
+  if (!is.integer(x)) {
+    x <- as.integer(x)
+    warning(paste("Input was not an integer, converting to the integer", x))
+  }
 
   class(x) <- "door"
   return(x)
@@ -65,6 +68,8 @@ validate_door <- function(x) {
   if (!(x %in% c(1L, 2L, 3L))) {
     stop("Choice must be an inetger between 1 and 3")
   }
+
+  return(TRUE)
 }
 
 # METHOD -----------------------------------------------------------------------
@@ -76,6 +81,9 @@ PlayGame <- function(x) {
 
 # Class Method
 PlayGame.door <- function(x) {
+
+  # Validate the input before running code
+  validate_door(x)
 
   # Made the random door choose from integers just in case some numerical
   # error could show up otherwise
@@ -90,6 +98,7 @@ PlayGame.door <- function(x) {
 
 # Testing functions
 test <- new_door(1L)
+new_door(1)
 
 validate_door(test)
 
