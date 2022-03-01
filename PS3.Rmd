@@ -96,11 +96,21 @@ PlayGame.door <- function(x) {
   }
 }
 
+# create consistent results
+set.seed(12345)
+
 # Testing functions
-test <- new_door(1L)
+test_1 <- new_door(1L)
+test_2 <- new_door(3L)
+
 new_door(1)
 
-validate_door(test)
+validate_door(test_1)
 
-PlayGame(test)
+
+# The first one should have the losing message and the second one should have
+# the winning message
+PlayGame(test_1)
+PlayGame(test_2)
+
 ```
