@@ -107,7 +107,6 @@ new_door(1)
 
 validate_door(test_1)
 
-
 # The first one should have the losing message and the second one should have
 # the winning message
 PlayGame(test_1)
