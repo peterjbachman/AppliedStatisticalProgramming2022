@@ -25,9 +25,7 @@ Due Wednesday, March 16, 10:00 AM (Before Class) \\
 
 Your task in this problem set is to combine two datasets in order to observe how many endorsements each candidate received using only \texttt{dplyr} functions. Use the same Presidential primary polls that were used for the in class worksheets on February 28 and March 2.
 
-```{r eval=FALSE}
-# Change eval=FALSE in the code block. Install packages as appropriate.
-#install.packages("fivethirtyeight")
+```{r eval=TRUE}
 library(fivethirtyeight)
 library(tidyverse)
 # URL to the data that you've used.
@@ -49,19 +47,34 @@ First, create two new objects \texttt{polls} and \texttt{Endorsements}. Then com
   \item Now, using the knowledge from the last step change the label of the X and Y axes to be more informative, add a title. Save the plot in your forked repository.
 \end{itemize}
 
+```{r}
+# Change variable name endorsee in Endorsements df to candidate_name
+# Change endorsements df to tibble
+# Filter poll variable to include 6 candidates
+# Subset the data to include the five variables
+
+# All of the above can be done in one pipe?
+
+# Find differently spelled names and unify them (use only dplyr)
+
+# Variable where number of endorsements is counted
+
+# Plot each of the 6(?) candidates
+
+# add theme_dark()
+
+# Add titles, and save plot
+```
+
 
 \section*{Text-as-Data with \texttt{tidyverse}}
 
 For this question you will be analyzing Tweets from President Trump for various characteristics. Load in the following packages and data:
 
-```{r eval=FALSE}
-# Change eval=FALSE in the code block. Install packages as appropriate.
+```{r eval=TRUE}
 library(tidyverse)
-#install.packages('tm')
 library(tm) 
-#install.packages('lubridate')
 library(lubridate)
-#install.packages('wordcloud')
 library(wordcloud)
 trump_tweets_url <- 'https://politicaldatascience.com/PDS/Datasets/trump_tweets.csv'
 tweets <- read_csv(trump_tweets_url)
