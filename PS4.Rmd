@@ -160,24 +160,31 @@ tweets <- read_csv(trump_tweets_url)
 \end{itemize}
 
 ```{r}
-tweets$created_at <- mdy_hm(tweets$created_at)
-
-# Separate day and time
+# PART 1 -----------------------------------------------------------------------
+## Separate day and time
 tweets_filtered <- tweets %>%
   separate(created_at, into = c("day", "time"), sep = " ", remove = FALSE) %>%
   mutate(day = mdy(day))
 
-# Report range of dates
+## Report range of dates
 range(tweets_filtered$day)
 
-# Filtering out retweets
+# PART 2 -----------------------------------------------------------------------
+## Filtering out retweets
 tweets_filtered <- tweets_filtered %>%
   filter(is_retweet == FALSE)
 
-# Top 5 tweets based on retweet count
-tweets_filtered$text[order(tweets_filtered$retweet_count, decreasing = TRUE)[1:5]]
+## Top 5 tweets based on retweet count
+slice_max(tweets_filtered, order_by = retweet_count, n = 5)$text
 
-# Top 5 retweets based on favorite count
-tweets_filtered$text[order(tweets_filtered$favorite_count, decreasing = TRUE)[1:5]]
+## Top 5 retweets based on favorite count
+slice_max(tweets_filtered, order_by = favorite_count, n = 5)$text
+
+# PART 3 -----------------------------------------------------------------------
+## Where is this stuff in the assigned readings???
+Corpus <- Corpus(VectorSource(tweets_filtered$text))
+
+# PART 4 -----------------------------------------------------------------------
+
 ```
 
