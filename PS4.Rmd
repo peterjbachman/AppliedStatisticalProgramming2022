@@ -140,7 +140,7 @@ tweets <- read_csv(trump_tweets_url)
         where the date and the time are in separate columns. After you do that,
         then report the range of dates that is in this dataset.
   \item Using \texttt{dplyr} subset the data to only include original tweets
-        (remove retweents) and show the text of the President's \textbf{top 5}
+        (remove retweets) and show the text of the President's \textbf{top 5}
         most popular and most retweeted tweets. (Hint: The \texttt{match}
         function can help you find the index once you identify the largest values.) 
   \item Create a \textit{corpus} of the tweet content and put this into the
@@ -158,3 +158,26 @@ tweets <- read_csv(trump_tweets_url)
   \item Finally, report the 50 words with the the highest tf.idf scores using a
         lower frequency bound of .8.
 \end{itemize}
+
+```{r}
+tweets$created_at <- mdy_hm(tweets$created_at)
+
+# Separate day and time
+tweets_filtered <- tweets %>%
+  separate(created_at, into = c("day", "time"), sep = " ", remove = FALSE) %>%
+  mutate(day = mdy(day))
+
+# Report range of dates
+range(tweets_filtered$day)
+
+# Filtering out retweets
+tweets_filtered <- tweets_filtered %>%
+  filter(is_retweet == FALSE)
+
+# Top 5 tweets based on retweet count
+tweets_filtered$text[order(tweets_filtered$retweet_count, decreasing = TRUE)[1:5]]
+
+# Top 5 retweets based on favorite count
+tweets_filtered$text[order(tweets_filtered$favorite_count, decreasing = TRUE)[1:5]]
+```
+
