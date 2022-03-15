@@ -154,7 +154,7 @@ tweets <- read_csv(trump_tweets_url)
         times. Display the plot with words in random order and use 50 random
         colors. Save the plot into your forked repository.\item Create a
         \textit{document term matrix} called \texttt{DTM} that includes the
-        argument \texttt{ control = list(weighting = weightTfIdf)}
+        argument \texttt{control = list(weighting = weightTfIdf)}
   \item Finally, report the 50 words with the the highest tf.idf scores using a
         lower frequency bound of .8.
 \end{itemize}
@@ -181,10 +181,28 @@ slice_max(tweets_filtered, order_by = retweet_count, n = 5)$text
 slice_max(tweets_filtered, order_by = favorite_count, n = 5)$text
 
 # PART 3 -----------------------------------------------------------------------
-## Where is this stuff in the assigned readings???
-Corpus <- Corpus(VectorSource(tweets_filtered$text))
+Corpus <- VCorpus(VectorSource(tweets_filtered$text))
 
 # PART 4 -----------------------------------------------------------------------
+removeSymbols <- content_transformer(function(x, pattern) gsub(pattern, "", x))
+
+Corpus <- Corpus %>%
+  ## Remove Punctuation
+  tm_map(removePunctuation) %>%
+  ## Various symbols not removed with any function in the tm package
+  tm_map(removeSymbols, "[“”‘’…&@():$%.\\/\\\\]") %>%
+  ## Remove Numbers
+  tm_map(removeNumbers) %>%
+  ## Make all lowercase
+  tm_map(content_transformer(tolower)) %>%
+  ## Remove Stopwords
+  tm_map(removeWords, c("im", stopwords("english"))) %>%
+  ## Stripping whitespace
+  tm_map(stripWhitespace)
+
+# PART 5 -----------------------------------------------------------------------
+## Create DTM object
+DTM <- DocumentTermMatrix(Corpus, control = list(weighting = weightTfIdf))
 
 ```
 
