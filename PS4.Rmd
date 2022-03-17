@@ -76,15 +76,16 @@ Endorsements <- endorsements_2020 # from the fiverthirtyeight package
 # SET SEED FOR REPLICATION
 set.seed(12345)
 
+## PART 1 & 2 ------------------------------------------------------------------
 Endorsements_filtered <- Endorsements %>%
-  # Change variable name endorsee in Endorsements df to candidate_name
+  ## Change variable name endorsee in Endorsements df to candidate_name
   rename(candidate_name = endorsee) %>%
-  # Change endorsements df to tibble
+  ## Change endorsements df to tibble
   as.tibble()
 
-
+# PART 3 -----------------------------------------------------------------------
 polls_filtered <- polls %>%
-  # Filter poll variable to include 6 candidates
+  ## Filter poll variable to include 6 candidates
   filter(candidate_name %in% c(
     "Amy Klobuchar",
     "Bernard Sanders",
@@ -93,11 +94,12 @@ polls_filtered <- polls %>%
     "Michael Bloomberg",
     "Pete Buttigieg"
   )) %>%
-  # Subset the data to include the five variables
+  ## Subset the data to include the five variables
   select(candidate_name, sample_size, start_date, party, pct)
 
-# Find differently spelled names and unify them (use only dplyr)
-# The 'polls' names are used as the standard here
+# PART 4 -----------------------------------------------------------------------
+## Find differently spelled names and unify them (use only dplyr)
+## The 'polls' names are used as the standard here
 Endorsements_filtered <- Endorsements_filtered %>%
   mutate(candidate_name = case_when(
     candidate_name == "Bernie Sanders" ~ "Bernard Sanders",
@@ -105,22 +107,50 @@ Endorsements_filtered <- Endorsements_filtered %>%
     TRUE ~ as.character(candidate_name)
   ))
 
-# Merge the two datasets by candidate_name
-# Currently not sure what kind of merge to do here. Will think about it more.
-test <- inner_join(polls_filtered, Endorsements_filtered, by = "candidate_name")
+# PART 5 -----------------------------------------------------------------------
+## Merge the two datasets by candidate_name
+## Michael Bloomberg is absent from the new dataset
+Endorsements_polls <- left_join(Endorsements_filtered,
+                                polls_filtered,
+                                by = "candidate_name")
 
-# Variable where number of endorsements is counted
+# PART 6 -----------------------------------------------------------------------
+## Variable where number of endorsements is counted
+## It doesn't make sense to use the merged dataset since there are many more rows
+## than endorsements there. We will filter the endorsements dataset and use that
+## to get the number of endorsements
 
+endorsements_total <- Endorsements_filtered %>% 
+  filter(candidate_name %in% c(
+    "Amy Klobuchar",
+    "Bernard Sanders",
+    "Elizabeth Warren",
+    "Joseph R. Biden Jr.",
+    "Michael Bloomberg",
+    "Pete Buttigieg"
+  )) %>%
+  group_by(candidate_name) %>%
+  summarise(candidate_name = candidate_name, endorsements = n()) %>%
+  unique()
 
-# Plot each of the 6(?) candidates
+endorsements_total
 
+# PART 7 -----------------------------------------------------------------------
+## Plot each of the 5 candidates
+p <- ggplot(data = endorsements_total, mapping = aes(x = candidate_name, y = endorsements)) +
+  geom_bar(stat = "identity")
+p
 
-# add theme_dark()
+# Part 8 -----------------------------------------------------------------------
+## add theme_dark()
+p + theme_dark()
 
-
-# Add titles, and save plot
-
-
+# Part 9 -----------------------------------------------------------------------
+## Add titles, and save plot
+p + labs(x = "Candidate",
+         y = "Number of Endorsements",
+         title = "Number of Endorsements per Democratic Candidate")
+ggsave(filename = "./plots/PS4_endorsements.png")
 ```
 
 
