@@ -185,11 +185,12 @@ slice_max(tweets_filtered, order_by = favorite_count, n = 5)$text
 
 # PART 3 -----------------------------------------------------------------------
 tweets_retweets <- tweets_filtered %>%
-  arrange(desc(retweet_count))
+  arrange(desc(retweet_count)) %>%
+  ## Using only the top 5 tweets in the next part does not give many words, so
+  ## I'm upping it to 500 so there's something to work with.
+  head(500)
 
-top_retweets <- tweets_retweets[1:500, ]
-
-Corpus <- VCorpus(VectorSource(top_retweets$text))
+Corpus <- VCorpus(VectorSource(tweets_retweets$text))
 
 # PART 4 -----------------------------------------------------------------------
 removeSymbols <- content_transformer(function(x, pattern) gsub(pattern, "", x))
@@ -219,7 +220,8 @@ words_freq <- dtm[frequency, ] %>%
   data.frame(Word = frequency, Frequency = ., row.names = NULL) %>%
   arrange(desc(Frequency)) %>%
   ## Removing any words that do not appear at least 3 times
-  filter(Frequency >= 3)
+  filter(Frequency >= 3) %>%
+  head(50)
 
 ## Getting 50 random colors for the wordcloud
 colors <- colors() %>%
@@ -228,10 +230,8 @@ colors <- colors() %>%
 ## save in the plots folder
 png("./plots/PS4_wordcloud.png", width = 500, height = 500)
 
-## using the max.words argument causes issues with the colors argument since the
-## dataset is longer than the vector.
-wordcloud(words_freq$Word[1:50],
-  words_freq$Frequency[1:50],
+wordcloud(words_freq$Word,
+  words_freq$Frequency,
   random.order = TRUE,
   ordered.colors = TRUE,
   colors = colors
@@ -241,6 +241,17 @@ dev.off()
 # Part 6 -----------------------------------------------------------------------
 ## Create DTM object
 DTM <- DocumentTermMatrix(Corpus, control = list(weighting = weightTfIdf))
+
+# PART 7 -----------------------------------------------------------------------
+## Similar process as in Part 5
+DTM_frequency <- DTM %>%
+  as.matrix() %>%
+  colSums() %>%
+  sort(decreasing = TRUE) %>%
+  data.frame() %>%
+  rename("tf.idf" = ".") %>%
+  filter('tf.idf' >= 0.8) %>%
+  head(50)
 
 ```
 
