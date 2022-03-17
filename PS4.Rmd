@@ -73,6 +73,9 @@ Endorsements <- endorsements_2020 # from the fiverthirtyeight package
 ```
 
 ```{r}
+# SET SEED FOR REPLICATION
+set.seed(12345)
+
 Endorsements_filtered <- Endorsements %>%
   # Change variable name endorsee in Endorsements df to candidate_name
   rename(candidate_name = endorsee) %>%
@@ -184,7 +187,7 @@ slice_max(tweets_filtered, order_by = favorite_count, n = 5)$text
 tweets_retweets <- tweets_filtered %>%
   arrange(desc(retweet_count))
 
-top_retweets <- tweets_retweets[1:500,]
+top_retweets <- tweets_retweets[1:500, ]
 
 Corpus <- VCorpus(VectorSource(top_retweets$text))
 
@@ -207,13 +210,33 @@ Corpus <- Corpus %>%
 
 # PART 5 -----------------------------------------------------------------------
 dtm <- TermDocumentMatrix(Corpus)
-frequency <- findFreqTerms(dtm)[1:max(dtm$nrow)]
-terms_grouped <- dtm[frequency,] %>%
+frequency <- findFreqTerms(dtm)[1:dtm$nrow]
+words_freq <- dtm[frequency, ] %>%
   as.matrix() %>%
+  ## Get the frequency of each word since the former matrix shows how often the
+  ## word appears in each tweet. So the sum should be the total number of occurrences.
   rowSums() %>%
-  data.frame(Term=frequency, Frequency = .) %>%
+  data.frame(Word = frequency, Frequency = ., row.names = NULL) %>%
   arrange(desc(Frequency)) %>%
-  as.data.frame(row.names = 1:nrow(.))
+  ## Removing any words that do not appear at least 3 times
+  filter(Frequency >= 3)
+
+## Getting 50 random colors for the wordcloud
+colors <- colors() %>%
+  sample(50, replace = FALSE)
+
+## save in the plots folder
+png("./plots/PS4_wordcloud.png", width = 500, height = 500)
+
+## using the max.words argument causes issues with the colors argument since the
+## dataset is longer than the vector.
+wordcloud(words_freq$Word[1:50],
+  words_freq$Frequency[1:50],
+  random.order = TRUE,
+  ordered.colors = TRUE,
+  colors = colors
+)
+dev.off()
 
 # Part 6 -----------------------------------------------------------------------
 ## Create DTM object
