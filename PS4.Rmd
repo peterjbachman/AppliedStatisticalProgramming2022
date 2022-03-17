@@ -152,9 +152,9 @@ tweets <- read_csv(trump_tweets_url)
   \item Now create a \texttt{wordcloud} to visualize the top 50 words the
         President uses in his tweets. Use only words that occur at least three
         times. Display the plot with words in random order and use 50 random
-        colors. Save the plot into your forked repository.\item Create a
-        \textit{document term matrix} called \texttt{DTM} that includes the
-        argument \texttt{control = list(weighting = weightTfIdf)}
+        colors. Save the plot into your forked repository.
+  \item Create a \textit{document term matrix} called \texttt{DTM} that includes
+        the argument \texttt{control = list(weighting = weightTfIdf)}
   \item Finally, report the 50 words with the the highest tf.idf scores using a
         lower frequency bound of .8.
 \end{itemize}
@@ -181,7 +181,12 @@ slice_max(tweets_filtered, order_by = retweet_count, n = 5)$text
 slice_max(tweets_filtered, order_by = favorite_count, n = 5)$text
 
 # PART 3 -----------------------------------------------------------------------
-Corpus <- VCorpus(VectorSource(tweets_filtered$text))
+tweets_retweets <- tweets_filtered %>%
+  arrange(desc(retweet_count))
+
+top_retweets <- tweets_retweets[1:500,]
+
+Corpus <- VCorpus(VectorSource(top_retweets$text))
 
 # PART 4 -----------------------------------------------------------------------
 removeSymbols <- content_transformer(function(x, pattern) gsub(pattern, "", x))
@@ -201,6 +206,16 @@ Corpus <- Corpus %>%
   tm_map(stripWhitespace)
 
 # PART 5 -----------------------------------------------------------------------
+dtm <- TermDocumentMatrix(Corpus)
+frequency <- findFreqTerms(dtm)[1:max(dtm$nrow)]
+terms_grouped <- dtm[frequency,] %>%
+  as.matrix() %>%
+  rowSums() %>%
+  data.frame(Term=frequency, Frequency = .) %>%
+  arrange(desc(Frequency)) %>%
+  as.data.frame(row.names = 1:nrow(.))
+
+# Part 6 -----------------------------------------------------------------------
 ## Create DTM object
 DTM <- DocumentTermMatrix(Corpus, control = list(weighting = weightTfIdf))
 
