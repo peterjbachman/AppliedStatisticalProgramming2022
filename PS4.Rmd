@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 \begin{center}
-{\Large{\textbf{Problem Set 3}}} \\
+{\Large{\textbf{Problem Set 4}}} \\
 \vspace{4 bp}
 Due Wednesday, March 16, 10:00 AM (Before Class) \\
 \end{center}
@@ -111,8 +111,9 @@ Endorsements_filtered <- Endorsements_filtered %>%
 ## Merge the two datasets by candidate_name
 ## Michael Bloomberg is absent from the new dataset
 Endorsements_polls <- left_join(Endorsements_filtered,
-                                polls_filtered,
-                                by = "candidate_name")
+  polls_filtered,
+  by = "candidate_name"
+)
 
 # PART 6 -----------------------------------------------------------------------
 ## Variable where number of endorsements is counted
@@ -120,7 +121,7 @@ Endorsements_polls <- left_join(Endorsements_filtered,
 ## than endorsements there. We will filter the endorsements dataset and use that
 ## to get the number of endorsements
 
-endorsements_total <- Endorsements_filtered %>% 
+endorsements_total <- Endorsements_filtered %>%
   filter(candidate_name %in% c(
     "Amy Klobuchar",
     "Bernard Sanders",
@@ -147,9 +148,11 @@ p + theme_dark()
 
 # Part 9 -----------------------------------------------------------------------
 ## Add titles, and save plot
-p + labs(x = "Candidate",
-         y = "Number of Endorsements",
-         title = "Number of Endorsements per Democratic Candidate")
+p + labs(
+  x = "Candidate",
+  y = "Number of Endorsements",
+  title = "Number of Endorsements per Democratic Candidate"
+)
 ggsave(filename = "./plots/PS4_endorsements.png")
 ```
 
@@ -280,7 +283,7 @@ DTM_frequency <- DTM %>%
   sort(decreasing = TRUE) %>%
   data.frame() %>%
   rename("tf.idf" = ".") %>%
-  filter('tf.idf' >= 0.8) %>%
+  filter("tf.idf" >= 0.8) %>%
   head(50)
 
 ```
