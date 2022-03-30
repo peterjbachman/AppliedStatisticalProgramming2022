@@ -4,9 +4,18 @@
 \name{Trapezoid-class}
 \alias{Trapezoid-class}
 \title{Trapezoid S4 Class}
-\value{
-The sum of \code{x} and \code{y}
-}
 \description{
 Trapezoid S4 Class
 }
+\section{Slots}{
+
+\describe{
+\item{\code{x}}{vector of values}
+
+\item{\code{y}}{vector of resulting values}
+
+\item{\code{a}}{Start value of integration}
+
+\item{\code{b}}{End value of integration}
+}}
+
