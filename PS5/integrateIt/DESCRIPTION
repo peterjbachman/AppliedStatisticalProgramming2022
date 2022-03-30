@@ -1,0 +1,13 @@
+Package: integrateIt
+Title: Integral Approximation Via Trapezoidal And Simpson's Rule (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person("Peter", "Bachman", , "bachman.p@wustl.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Approximation of integrals using either the Trapezoidal Rule or Simpson's Rule.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: 
+    methods
