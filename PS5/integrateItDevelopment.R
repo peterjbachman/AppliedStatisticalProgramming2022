@@ -15,6 +15,9 @@ document(current.code)
 
 x = 1:5
 y <- x^2
+testX <- seq(1, 4, length.out = 4)
+testY <- sin(testX)
 integrateIt(x, y, 2, 4, "Trapezoid")
 integrateIt(x, y, 2, 4, "Simpson")
-integrateIt(testX, testY, 0, 2, "Simpson")
+integrateIt(testX, testY, 1, 4, "Simpson")
+integrateIt(testX, testY, 1, 4, "Trapezoid")
