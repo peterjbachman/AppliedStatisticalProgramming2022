@@ -8,16 +8,21 @@
 integrateIt(x, y, a, b, rule)
 }
 \arguments{
-\item{x}{A numeric object}
+\item{x}{Vector of X values, numeric}
 
-\item{y}{A numeric object with the same dimensionality as \code{x}.}
+\item{y}{Vector of Y values in relation to \code{x}, numeric}
+
+\item{a}{Starting value found in \code{x}}
+
+\item{b}{Ending value found in \code{x}, numeric object}
+
+\item{rule}{Stating estimation rule to use. Either \code{"Trapezoid"} or \code{"Simpson"}}
 }
 \value{
-An object of class AllSquares containing
-\item{addSquares}{The sum of the squared values}
-\item{subtractSquares}{The difference of the squared values}
-\item{x}{The first object input}
-\item{y}{The second object input}
+A list containing:
+\item{EstType}{Estimation Class}
+\item{Estimation}{Result of the estimation}
+\item{Values}{Matrix of X and Y used in estimation}
 }
 \description{
 Calculates the integral estimation using either the Trapezoid rule or Simpson's rule
