@@ -30,13 +30,27 @@ setGeneric(
 
 setMethod("integrateIt",
   definition = function(x, y, a, b, rule) {
+    # find interval for values of x
+    .intervalX <- x[x >= a & x <= b]
+    .intervalY <- y[x >= a & x <= b]
+    .n <- length(.intervalX)
+    .h <- (b - a) / .n
+
+    # not sure why we don't separate the generic in the setMethod but oh well
     if (rule == "Trapezoid") {
-      .n <- length(x)
-      .h <- (b - a) / .n
-      .class <- new("Trapezoid", x = x, y = y, a = a, b = b)
-      .est <- sum((.h / 2) * (rep_len(1:2, .n) * y))
+      .est <- (.h / 2) * sum(
+          (rep_len(1:2, .n) * .intervalY)
+        )
+      .class <- new("Trapezoid", x = .intervalX, y = .intervalY, a = a, b = b, n = .n, est = .est)
+    } else if (rule == "Simpson") {
+      .est <- (.h / 3) * sum(
+        (.intervalY[1] + (rep_len(c(4,2), .n - 2) * .intervalY[2:(.n - 1)]) + .intervalY[.n])
+        )
+      .class <- new("Simpson", x = .intervalX, y = .intervalY, a = a, b = b, n = .n, est = .est)
+    } else {
+      stop("Defined rule is not allowed. Use either Trapezoid or Simpson")
     }
 
-    return(list(.class, .est, c(x, y)))
+    return(list(.class, .est, matrix(c(x,y), ncol = 2)))
   }
 )
