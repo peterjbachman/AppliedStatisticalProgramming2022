@@ -29,10 +29,25 @@ setClass(
 )
 
 #' @export
+setValidity("Simpson", function(object){
+  # x and y are the same length
+  test1 <- length(object@x) == length(object@y)
+  # n is the right interval
+  test2 <- length(object@x[object@x >= object@a & object@x <= object@b]) == (object@n + 1)
+  # a and b are in the vector x
+  test3 <- object@a %in% object@x & object@b %in% object@x
+  if(!test1){stop("@x and @y are not the same length")}
+  if(!test2){stop("@n is not the correct interval")}
+  if(!test3){stop("@a or @b are not contained in @x")}
+}
+)
+
+#' @export
 setMethod(
   "initialize", "Simpson",
   function(.Object, ...) {
     value <- callNextMethod()
+    validObject(value)
     return(value)
   }
 )

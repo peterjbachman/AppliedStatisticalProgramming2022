@@ -22,7 +22,7 @@ integrateIt(x, y, a, b, rule)
 A list containing:
 \item{EstType}{Estimation Class}
 \item{Estimation}{Result of the estimation}
-\item{Values}{Matrix of X and Y used in estimation}
+\item{Values}{Matrix of X and Y given in function}
 }
 \description{
 Calculates the integral estimation using either the Trapezoid rule or Simpson's rule
