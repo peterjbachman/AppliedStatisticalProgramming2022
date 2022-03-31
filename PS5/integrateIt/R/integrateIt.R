@@ -33,24 +33,20 @@ setMethod("integrateIt",
     # find interval for values of x
     .intervalX <- x[x >= a & x <= b]
     .intervalY <- y[x >= a & x <= b]
-    .n <- length(.intervalX)
+    .n <- length(.intervalX) - 1
     .h <- (b - a) / .n
 
     # not sure why we don't separate the generic in the setMethod but oh well
     if (rule == "Trapezoid") {
-      .est <- (.h / 2) * sum(
-          (rep_len(1:2, .n) * .intervalY)
-        )
+      .est <- (.h / 2) * (.intervalY[1] + sum(2 * .intervalY[2:(.n)]) + .intervalY[.n + 1])
       .class <- new("Trapezoid", x = .intervalX, y = .intervalY, a = a, b = b, n = .n, est = .est)
     } else if (rule == "Simpson") {
-      .est <- (.h / 3) * sum(
-        (.intervalY[1] + (rep_len(c(4,2), .n - 2) * .intervalY[2:(.n - 1)]) + .intervalY[.n])
-        )
+      .est <- (.h / 3) * (.intervalY[1] + sum((rep_len(c(4,2), .n - 1) * .intervalY[2:(.n)])) + .intervalY[.n + 1])
       .class <- new("Simpson", x = .intervalX, y = .intervalY, a = a, b = b, n = .n, est = .est)
     } else {
       stop("Defined rule is not allowed. Use either Trapezoid or Simpson")
     }
 
-    return(list(.class, .est, matrix(c(x,y), ncol = 2)))
+    return(list(.class, .est, matrix(c(x,y), ncol = 2), .h))
   }
 )
