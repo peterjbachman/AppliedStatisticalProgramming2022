@@ -28,7 +28,6 @@ setClass(
   )
 )
 
-#' @export
 setValidity("Trapezoid", function(object){
   # x and y are the same length
   test1 <- length(object@x) == length(object@y)

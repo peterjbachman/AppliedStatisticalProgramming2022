@@ -19,5 +19,6 @@ testX <- seq(1, 4, length.out = 4)
 testY <- sin(testX)
 integrateIt(x, y, 1, 3, "Trapezoid")
 integrateIt(x, y, 2, 4, "Simpson")
-integrateIt(testX, testY, 1, 4, "Simpson")
+integrateIt(testX, testY, 1, 4, "simpson")
 integrateIt(testX, testY, 1, 4, "Trapezoid")
+
