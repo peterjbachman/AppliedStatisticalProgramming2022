@@ -17,5 +17,9 @@ Trapezoid S4 Class
 \item{\code{a}}{Start value of integration}
 
 \item{\code{b}}{End value of integration}
+
+\item{\code{n}}{number of intervals}
+
+\item{\code{est}}{estimate of integral given the above information}
 }}
 
