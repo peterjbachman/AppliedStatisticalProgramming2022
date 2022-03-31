@@ -28,16 +28,17 @@ A list containing:
 Calculates the integral estimation using either the Trapezoid rule or Simpson's rule
 }
 \note{
-This produces an object of a new class
+The interval in this is calculated automatically as being 1 - the distance between a and b in the vector \code{x}
 }
 \examples{
 
-myX <- c(20, 3)
-myY <- c(-2, 4.1)
-allSquares(myX, myY)
+X <- 1:5
+y <- sin(X)
+integrateIt(X, Y, 1, 5, "Trapezoid")
+integrateIt(X, Y, 2, 4, "Simpson")
 }
 \seealso{
-\code{\link{Trapezoid}}
+\code{\link{Trapezoid}}, \code{\link{Simpson}}
 }
 \author{
 Peter Bachman

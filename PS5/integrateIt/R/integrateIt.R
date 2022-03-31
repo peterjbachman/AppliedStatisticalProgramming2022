@@ -13,13 +13,14 @@
 #'  \item{Estimation}{Result of the estimation}
 #'  \item{Values}{Matrix of X and Y used in estimation}
 #' @author Peter Bachman
-#' @note This produces an object of a new class
+#' @note The interval in this is calculated automatically as being 1 - the distance between a and b in the vector \code{x}
 #' @examples
 #'
-#' myX <- c(20, 3)
-#' myY <- c(-2, 4.1)
-#' allSquares(myX, myY)
-#' @seealso \code{\link{Trapezoid}}
+#' X <- 1:5
+#' y <- sin(X)
+#' integrateIt(X, Y, 1, 5, "Trapezoid")
+#' integrateIt(X, Y, 2, 4, "Simpson")
+#' @seealso \code{\link{Trapezoid}}, \code{\link{Simpson}}
 #' @rdname integrateIt
 #' @aliases IntegrateIt
 #' @export
@@ -38,11 +39,11 @@ setMethod("integrateIt",
     .n <- length(.intervalX) - 1
     .h <- (b - a) / .n
     # not sure why we don't separate the generic in the setMethod but oh well
-    if (rule == "Trapezoid") {
+    if (tolower(rule) == "trapezoid") {
       # calculate the estimate
       .est <- (.h / 2) * (.intervalY[1] + sum(2 * .intervalY[2:(.n)]) + .intervalY[.n + 1])
       .class <- new("Trapezoid", x = .intervalX, y = .intervalY, a = a, b = b, n = .n, est = .est)
-    } else if (rule == "Simpson") {
+    } else if (tolower(rule) == "simpson") {
       # calculate the estimate
       # rep_len(c(4,2), .n - 1) flips between 4 and 2
       .est <- (.h / 3) * (.intervalY[1] + sum((rep_len(c(4,2), .n - 1) * .intervalY[2:(.n)])) + .intervalY[.n + 1])
