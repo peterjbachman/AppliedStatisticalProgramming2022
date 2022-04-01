@@ -5,18 +5,18 @@
 \alias{IntegrateIt}
 \title{Integrate via Trapezoid or Simpson's rule}
 \usage{
-integrateIt(x, y, a, b, rule)
+integrateIt(fun, a, b, n, rule)
 }
 \arguments{
-\item{x}{Vector of X values, numeric}
-
-\item{y}{Vector of Y values in relation to \code{x}, numeric}
-
 \item{a}{Starting value found in \code{x}}
 
 \item{b}{Ending value found in \code{x}, numeric object}
 
 \item{rule}{Stating estimation rule to use. Either \code{"Trapezoid"} or \code{"Simpson"}}
+
+\item{x}{Vector of X values, numeric}
+
+\item{y}{Vector of Y values in relation to \code{x}, numeric}
 }
 \value{
 A list containing:

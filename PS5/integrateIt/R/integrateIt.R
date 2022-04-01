@@ -26,32 +26,37 @@
 #' @export
 setGeneric(
   name = "integrateIt",
-  def = function(x, y, a, b, rule) {
+  def = function(fun, a, b, n, rule) {
     standardGeneric("integrateIt")
   }
 )
 
 setMethod("integrateIt",
-  definition = function(x, y, a, b, rule) {
-    # find interval for values of x
-    .intervalX <- x[x >= a & x <= b]
-    .intervalY <- y[x >= a & x <= b]
-    .n <- length(.intervalX) - 1
-    .h <- (b - a) / .n
+  definition = function(fun, a, b, n, rule) {
+    # create interval for estimation
+    .interval <- seq(a, b, length.out = (n + 1))
+    .h <- (b - a) / n
+
     # not sure why we don't separate the generic in the setMethod but oh well
     if (tolower(rule) == "trapezoid") {
+
       # calculate the estimate
-      .est <- (.h / 2) * (.intervalY[1] + sum(2 * .intervalY[2:(.n)]) + .intervalY[.n + 1])
-      .class <- new("Trapezoid", x = x, y = y, a = a, b = b, n = .n, est = .est)
+      .est <- (.h / 2) * (fun(.interval[1]) + sum(2 * fun(.interval[2:(n)])) + fun(.interval[n + 1]))
+      .class <- new("Trapezoid", fun = fun, a = a, b = b, n = n, est = .est)
+
     } else if (tolower(rule) == "simpson") {
+
       # calculate the estimate
       # rep_len(c(4,2), .n - 1) flips between 4 and 2
-      .est <- (.h / 3) * (.intervalY[1] + sum((rep_len(c(4,2), .n - 1) * .intervalY[2:(.n)])) + .intervalY[.n + 1])
-      .class <- new("Simpson", x = x, y = y, a = a, b = b, n = .n, est = .est)
+      .est <- (.h / 3) * (fun(.interval[1]) + sum((rep_len(c(4,2), n - 1) * fun(.interval[2:(n)]))) + fun(.interval[n + 1]))
+      .class <- new("Simpson", fun = fun, a = a, b = b, n = n, est = .est)
+
     } else {
+
       stop("Defined rule is not allowed. Use either Trapezoid or Simpson")
+
     }
     # Return the list of values requested
-    return(list(EstType = .class, Estimation = .est, Values = matrix(c(.class@x,.class@y), ncol = 2)))
+    return(list(EstType = .class, Estimation = .est, Values = "???", ncol = 2))
   }
 )

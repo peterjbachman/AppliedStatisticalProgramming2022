@@ -11,16 +11,14 @@
 setClass(
   Class = "Trapezoid",
   representation = representation(
-    x = "numeric",
-    y = "numeric",
+    fun = "function",
     a = "numeric",
     b = "numeric",
     n = "numeric",
     est = "numeric"
   ),
   prototype = prototype(
-    x = NA_real_,
-    y = NA_real_,
+    fun = function(x){return(x)},
     a = NA_real_,
     b = NA_real_,
     n = NA_real_,
@@ -29,12 +27,11 @@ setClass(
 )
 
 setValidity("Trapezoid", function(object){
-  # x and y are the same length
-  test1 <- length(object@x) == length(object@y)
+  test1 <- TRUE
   # n is the right interval
-  test2 <- length(object@x[object@x >= object@a & object@x <= object@b]) == (object@n + 1)
+  test2 <- TRUE
   # a and b are in the vector x
-  test3 <- object@a %in% object@x & object@b %in% object@x
+  test3 <- TRUE
   if(!test1){stop("@x and @y are not the same length")}
   if(!test2){stop("@n is not the correct interval")}
   if(!test3){stop("@a or @b are not contained in @x")}
