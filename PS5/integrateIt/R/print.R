@@ -6,12 +6,16 @@ setGeneric(
   }
 )
 
-setMethod("print", "Trapezoid",
-          function(object){
-            return(object@est)
-          })
+setMethod(
+  "print", "Trapezoid",
+  function(object) {
+    return(object@est)
+  }
+)
 
-setMethod("print", "Simpson",
-          function(object){
-            return(object@est)
-          })
+setMethod(
+  "print", "Simpson",
+  function(object) {
+    return(object@est)
+  }
+)
