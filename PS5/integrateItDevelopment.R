@@ -16,12 +16,8 @@ document(current.code)
 fun <- function(x){
   return(sin(x))
 }
-testX <- seq(1, 4, length.out = 4)
-testY <- sin(testX)
 test <- integrateIt(fun, 1, 3, 5,"Trapezoid")
-test2 <- integrateIt(x, y, 2, 4, "Simpson")
-integrateIt(testX, testY, 1, 4, "simpson")
-integrateIt(testX, testY, 1, 4, "Trapezoid")
+test <- integrateIt(fun, 1, 3, 5,"Simpson")
 
 print(test$EstType)
 print(test2$EstType)

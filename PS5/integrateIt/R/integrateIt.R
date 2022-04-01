@@ -42,14 +42,30 @@ setMethod("integrateIt",
 
       # calculate the estimate
       .est <- (.h / 2) * (fun(.interval[1]) + sum(2 * fun(.interval[2:(n)])) + fun(.interval[n + 1]))
-      .class <- new("Trapezoid", fun = fun, a = a, b = b, n = n, est = .est)
+      .class <- new("Simpson",
+                     fun = fun,
+                     x = .interval,
+                     y = fun(.interval),
+                     a = a,
+                     b = b,
+                     n = n,
+                     est = .est
+      )
 
     } else if (tolower(rule) == "simpson") {
 
       # calculate the estimate
       # rep_len(c(4,2), .n - 1) flips between 4 and 2
       .est <- (.h / 3) * (fun(.interval[1]) + sum((rep_len(c(4,2), n - 1) * fun(.interval[2:(n)]))) + fun(.interval[n + 1]))
-      .class <- new("Simpson", fun = fun, a = a, b = b, n = n, est = .est)
+      .class <- new("Simpson",
+                    fun = fun,
+                    x = .interval,
+                    y = fun(.interval),
+                    a = a,
+                    b = b,
+                    n = n,
+                    est = .est
+                    )
 
     } else {
 
@@ -57,6 +73,6 @@ setMethod("integrateIt",
 
     }
     # Return the list of values requested
-    return(list(EstType = .class, Estimation = .est, Values = "???", ncol = 2))
+    return(list(EstType = .class, Estimation = .est, Values = matrix(c(.class@x,.class@y), ncol = 2)))
   }
 )
