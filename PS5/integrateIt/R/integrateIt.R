@@ -16,10 +16,9 @@
 #' @note The interval in this is calculated automatically as being 1 - the distance between a and b in the vector \code{x}
 #' @examples
 #'
-#' X <- 1:5
-#' y <- sin(X)
-#' integrateIt(X, Y, 1, 5, "Trapezoid")
-#' integrateIt(X, Y, 2, 4, "Simpson")
+#' funct <- function(x) {return(sin(x))}
+#' integrateIt(funct, 1, 5, 10, "Trapezoid")
+#' integrateIt(funct, 1, 5, 10, "Simpson")
 #' @seealso \code{\link{Trapezoid}}, \code{\link{Simpson}}
 #' @rdname integrateIt
 #' @aliases IntegrateIt
