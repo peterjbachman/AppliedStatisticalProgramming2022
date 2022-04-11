@@ -5,6 +5,7 @@ setwd("../") # Run once
 ## Load libraries and set working directory
 library(devtools)
 library(roxygen2)
+library(testthat)
 
 ## This can be run many times as the code is updates
 current.code <- as.package("easyPois")
