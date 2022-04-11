@@ -27,7 +27,6 @@ estimatePois <- function(y, SEType = "basic", samples = 10) {
   }
 
   lambda <- mle(y)
-
   SE <- standardError(y, SEType, samples)
 
   # input everything into PoisMLE Class

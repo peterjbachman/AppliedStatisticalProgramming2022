@@ -18,6 +18,7 @@ mle <- function(y) {
   if (length(y) == 0) {
     stop("y should be a non-zero vector")
   }
+  # error for y vector with negative values
   if (any(y < 0)) {
     stop("y should be non-negative values")
   }

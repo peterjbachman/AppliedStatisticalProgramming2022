@@ -18,6 +18,7 @@
 #' @rdname logLik
 #' @export
 logLik <- function(y, lambda) {
+  # tests to make sure non-negative values aren't input
   if (lambda < 0) {
     stop("lambda should be non-negative")
   }

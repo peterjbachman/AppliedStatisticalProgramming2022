@@ -19,6 +19,7 @@
 #' @rdname standardError
 #' @export
 standardError <- function(y, SEType = "basic", B = 10) {
+  # tests to make sure incorrect values aren't input
   if (any(y < 0)) {
     stop("y should be non-negative values")
   }
