@@ -1,13 +1,12 @@
 #' Poisson S4 Class
 #'
+#' A class for a Poisson distribution with the following slots:
+#'
 #' @slot y vector of values
 #' @slot MLE maximum likelihood estimator
 #' @slot LL Log Likelihood from \code{y}
 #' @slot SE Standard Error
-#' @slot SEType Method of calculating Standard Error
-#' @rdname PoisMLE
-#' @export
-
+#' @slot SEType Method of calculating Standard Error, either `basic` or `bootstrap`
 setClass(
   Class = "PoisMLE",
   representation = representation(
@@ -27,14 +26,17 @@ setClass(
 )
 
 setValidity("PoisMLE", function(object) {
+  test1 <- object@SEType == "basic" | object@SEType == "bootstrap"
+  if (!test1) {
+    stop("@SEType needs to be either \'basic\' or \'bootstrap\'")
+  }
 })
 
-#' @export
 setMethod(
   "initialize", "PoisMLE",
   function(.Object, ...) {
-    value <- callNextMethod()
-    validObject(value)
+    value <- methods::callNextMethod()
+    methods::validObject(value)
     return(value)
   }
 )

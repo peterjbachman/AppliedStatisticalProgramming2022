@@ -5,7 +5,7 @@
 \alias{PoisMLE-class}
 \title{Poisson S4 Class}
 \description{
-Poisson S4 Class
+A class for a Poisson distribution with the following slots:
 }
 \section{Slots}{
 
@@ -18,6 +18,6 @@ Poisson S4 Class
 
 \item{\code{SE}}{Standard Error}
 
-\item{\code{SEType}}{Method of calculating Standard Error}
+\item{\code{SEType}}{Method of calculating Standard Error, either \code{basic} or \code{bootstrap}}
 }}
 

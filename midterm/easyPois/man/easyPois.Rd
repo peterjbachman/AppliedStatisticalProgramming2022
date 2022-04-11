@@ -6,7 +6,8 @@
 \alias{easyPois-package}
 \title{easyPois}
 \description{
-The easyPois package
+The easyPois package is used to estimate the value of lambda from a vector of
+data.
 }
 \author{
 Peter Bachman: \email{bachman.p@wustl.edu}
