@@ -30,6 +30,8 @@ setValidity("PoisMLE", function(object) {
   test2 <- object@MLE == mle(object@y)
   test3 <- object@LL == logLik(object@y, object@MLE)
   test4 <- if (object@SEType == "basic") {object@SE == standardError(object@y, "basic")} else {TRUE}
+  test5 <- any(object@y < 0)
+  test6 <- object@MLE < 0 | object@SE < 0
   if (!test1) {
     stop("@SEType needs to be either \'basic\' or \'bootstrap\'")
   }
@@ -41,6 +43,12 @@ setValidity("PoisMLE", function(object) {
   }
   if (!test4) {
     stop("SEType is \"basic\" and is not correct.")
+  }
+  if (test5) {
+    stop("y should be non-negative values")
+  }
+  if (test6) {
+    stop("MLE or SE cannot be negative")
   }
 })
 

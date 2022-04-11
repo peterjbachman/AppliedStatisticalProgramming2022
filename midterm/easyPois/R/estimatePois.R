@@ -21,6 +21,8 @@
 #' @rdname estimatePois
 #' @export
 estimatePois <- function(y, SEType = "basic", samples = 10) {
+  if (samples <= 0) {stop("Samples cannot be a non-positive number")}
+
   lambda <- mle(y)
 
     SE <- standardError(y, SEType, samples)

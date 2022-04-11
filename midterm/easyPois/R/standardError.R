@@ -18,6 +18,9 @@
 #' @rdname standardError
 #' @export
 standardError <- function(y, SEType = "basic", B = 10) {
+  if (any(y < 0)) {stop("y should be non-negative values")}
+  if (B <= 0) {stop("B cannot be a non-positive number")}
+
   if (SEType == "basic") {
     SE <- sqrt(mle(y) / length(y))
   } else if (SEType == "bootstrap") {
@@ -28,7 +31,7 @@ standardError <- function(y, SEType = "basic", B = 10) {
     MLE <- apply(samples, 2, mle)
     SE <- stats::sd(MLE)
   } else {
-    stop("")
+    stop("SEType should be either \"basic\" or \"bootstrap\".")
   }
 
   return(SE)

@@ -15,9 +15,8 @@
 #' @export
 mle <- function(y) {
   # Produce error for empty vectors
-  if (length(y) == 0) {
-    stop("y should be a non-zero vector")
-  }
+  if (length(y) == 0) {stop("y should be a non-zero vector")}
+  if (any(y < 0)) {stop("y should be non-negative values")}
 
   return(sum(y) / length(y))
 }
