@@ -1,6 +1,7 @@
 # This script comes from the devtoolsIntro from class
 # This correctly runs when the project is set to the easyPois package
 setwd("../") # Run for directory above current
+setwd("./easyPois") # Run for package directory
 
 ## Load libraries and set working directory
 library(devtools)
