@@ -21,12 +21,16 @@
 #' @rdname estimatePois
 #' @export
 estimatePois <- function(y, SEType = "basic", samples = 10) {
-  if (samples <= 0) {stop("Samples cannot be a non-positive number")}
+  # Check if samples is a positive number
+  if (samples <= 0) {
+    stop("Samples cannot be a non-positive number")
+  }
 
   lambda <- mle(y)
 
-    SE <- standardError(y, SEType, samples)
+  SE <- standardError(y, SEType, samples)
 
+  # input everything into PoisMLE Class
   PoisClass <- methods::new("PoisMLE", y = y, MLE = lambda, LL = logLik(y, lambda), SE = SE, SEType = SEType)
   return(PoisClass)
 }

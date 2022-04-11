@@ -3,7 +3,8 @@
 #' Calculates the Standard Error for a Poisson Distribution
 #'
 #' @param y A vector with the observed data
-#' @param SEType Calculate the standard error using either \code{basic} or \code{bootstrap}. Defaults to \code{basic}.
+#' @param SEType Calculate the standard error using either \code{basic} or
+#' \code{bootstrap}. Defaults to \code{basic}.
 #' @param B Number of samples. Default is 10 samples
 #' @return The Standard Error for the observed data.
 #' @author  Peter Bachman: \email{bachman.p@wustl.edu}
@@ -18,8 +19,12 @@
 #' @rdname standardError
 #' @export
 standardError <- function(y, SEType = "basic", B = 10) {
-  if (any(y < 0)) {stop("y should be non-negative values")}
-  if (B <= 0) {stop("B cannot be a non-positive number")}
+  if (any(y < 0)) {
+    stop("y should be non-negative values")
+  }
+  if (B <= 0) {
+    stop("B cannot be a non-positive number")
+  }
 
   if (SEType == "basic") {
     SE <- sqrt(mle(y) / length(y))

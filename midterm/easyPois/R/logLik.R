@@ -18,8 +18,12 @@
 #' @rdname logLik
 #' @export
 logLik <- function(y, lambda) {
-  if (lambda < 0) {stop("lambda should be non-negative")}
-  if (any(y < 0)) {stop("y should be non-negative values")}
+  if (lambda < 0) {
+    stop("lambda should be non-negative")
+  }
+  if (any(y < 0)) {
+    stop("y should be non-negative values")
+  }
 
   LL <- (-length(y) * lambda) - sum(log(factorial(y))) + (log(lambda) * sum(y))
   return(LL)

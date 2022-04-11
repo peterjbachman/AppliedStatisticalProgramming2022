@@ -29,7 +29,11 @@ setValidity("PoisMLE", function(object) {
   test1 <- object@SEType == "basic" | object@SEType == "bootstrap"
   test2 <- object@MLE == mle(object@y)
   test3 <- object@LL == logLik(object@y, object@MLE)
-  test4 <- if (object@SEType == "basic") {object@SE == standardError(object@y, "basic")} else {TRUE}
+  test4 <- if (object@SEType == "basic") {
+    object@SE == standardError(object@y, "basic")
+  } else {
+    TRUE
+  }
   test5 <- any(object@y < 0)
   test6 <- object@MLE < 0 | object@SE < 0
   if (!test1) {
