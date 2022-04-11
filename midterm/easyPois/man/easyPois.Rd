@@ -7,7 +7,8 @@
 \title{easyPois}
 \description{
 The easyPois package is used to estimate the value of lambda from a vector of
-data.
+data. You can create an S4 Class with the necessary information for a Poisson
+Distribution.
 }
 \author{
 Peter Bachman: \email{bachman.p@wustl.edu}
