@@ -9,7 +9,8 @@ standardError(y, SEType = "basic", B = 10)
 \arguments{
 \item{y}{A vector with the observed data}
 
-\item{SEType}{Calculate the standard error using either \code{basic} or \code{bootstrap}. Defaults to \code{basic}.}
+\item{SEType}{Calculate the standard error using either \code{basic} or
+\code{bootstrap}. Defaults to \code{basic}.}
 
 \item{B}{Number of samples. Default is 10 samples}
 }
