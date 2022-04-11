@@ -12,5 +12,5 @@ current.code <- as.package("easyPois")
 load_all(current.code)
 document(current.code)
 
-# Check the
+# Check that the package meets requirements
 check("./easyPois")

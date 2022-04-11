@@ -9,7 +9,15 @@
 #'        samples that will be used.
 #' @return an S4 class of \code{PoisMLE}
 #' @author  Peter Bachman: \email{bachman.p@wustl.edu}
-#' @seealso \link{\code{PoisMLE}}
+#' @seealso [PoisMLE-class]
+#'
+#' @examples
+#' set.seed(12345)
+#' y <- rpois(1000, 5)
+#'
+#' est <- estimatePois(y, SEType = "basic")
+#' estBoot <- estimatePois(y, SEType = "bootstrap", samples = 20)
+#'
 #' @rdname estimatePois
 #' @export
 estimatePois <- function(y, SEType = "basic", samples = 10) {

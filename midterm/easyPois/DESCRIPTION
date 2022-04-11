@@ -1,5 +1,5 @@
 Package: easyPois
-Title: What the Package Does (One Line, Title Case)
+Title: Easy Poisson Distribution Calculations
 Version: 0.1
 Authors@R: 
     person("Peter", "Bachman", , "bachman.p@wustl.edu", role = c("aut", "cre"))

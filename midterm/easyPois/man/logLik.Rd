@@ -17,8 +17,16 @@ The Log Likelihood Estimate
 \description{
 Calculates the Log Likelihood from observed data and a value for lambda
 }
+\examples{
+set.seed(12345)
+y <- rpois(1000, 5)
+l <- mle(y)
+
+logLik(y, l)
+
+}
 \seealso{
-\code{\link{mle}}
+\code{\link[=mle]{mle()}}
 }
 \author{
 Peter Bachman: \email{bachman.p@wustl.edu}

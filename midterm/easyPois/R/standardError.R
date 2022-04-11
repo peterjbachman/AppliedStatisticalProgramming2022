@@ -7,6 +7,14 @@
 #' @param B Number of samples. Default is 10 samples
 #' @return The Standard Error for the observed data.
 #' @author  Peter Bachman: \email{bachman.p@wustl.edu}
+#'
+#' @examples
+#' set.seed(12345)
+#' y <- rpois(1000, 5)
+#'
+#' standardError(y, "basic")
+#' standardError(y, "bootstrap", 20)
+#'
 #' @rdname standardError
 #' @export
 standardError <- function(y, SEType = "basic", B = 10) {
@@ -19,6 +27,8 @@ standardError <- function(y, SEType = "basic", B = 10) {
     # calculate the MLE per column
     MLE <- apply(samples, 2, mle)
     SE <- stats::sd(MLE)
+  } else {
+    stop("")
   }
 
   return(SE)

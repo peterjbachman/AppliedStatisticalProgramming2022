@@ -5,7 +5,13 @@
 #' @param y A vector with the observed data
 #' @return The MLE Estimate for lambda
 #' @author  Peter Bachman: \email{bachman.p@wustl.edu}
-#' @rdname mle
+#'
+#' @examples
+#' set.seed(12345)
+#' y <- rpois(1000, 5)
+#'
+#' mle(y)
+#'
 #' @export
 mle <- function(y) {
   # Produce error for empty vectors

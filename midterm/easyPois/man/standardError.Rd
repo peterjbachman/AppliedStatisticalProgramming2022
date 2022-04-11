@@ -19,6 +19,14 @@ The Standard Error for the observed data.
 \description{
 Calculates the Standard Error for a Poisson Distribution
 }
+\examples{
+set.seed(12345)
+y <- rpois(1000, 5)
+
+standardError(y, "basic")
+standardError(y, "bootstrap", 20)
+
+}
 \author{
 Peter Bachman: \email{bachman.p@wustl.edu}
 }

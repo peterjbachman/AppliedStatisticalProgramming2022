@@ -15,6 +15,13 @@ The MLE Estimate for lambda
 \description{
 Calculates the MLE for a Poisson Distribution
 }
+\examples{
+set.seed(12345)
+y <- rpois(1000, 5)
+
+mle(y)
+
+}
 \author{
 Peter Bachman: \email{bachman.p@wustl.edu}
 }

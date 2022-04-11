@@ -6,7 +6,15 @@
 #' @param lambda A value for the expected lambda
 #' @return The Log Likelihood Estimate
 #' @author  Peter Bachman: \email{bachman.p@wustl.edu}
-#' @seealso \code{\link{mle}}
+#' @seealso [mle()]
+#'
+#' @examples
+#' set.seed(12345)
+#' y <- rpois(1000, 5)
+#' l <- mle(y)
+#'
+#' logLik(y, l)
+#'
 #' @rdname logLik
 #' @export
 logLik <- function(y, lambda) {

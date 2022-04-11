@@ -21,8 +21,16 @@ an S4 class of \code{PoisMLE}
 \description{
 Calculates the estimates for a Poisson Distribution
 }
+\examples{
+set.seed(12345)
+y <- rpois(1000, 5)
+
+est <- estimatePois(y, SEType = "basic")
+estBoot <- estimatePois(y, SEType = "bootstrap", samples = 20)
+
+}
 \seealso{
-\link{\code{PoisMLE}}
+\linkS4class{PoisMLE}
 }
 \author{
 Peter Bachman: \email{bachman.p@wustl.edu}
