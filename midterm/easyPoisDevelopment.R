@@ -24,4 +24,3 @@ estBoot <- estimatePois(y, SEType = "bootstrap", samples = 20)
 
 plotPois(est)
 plotPois(estBoot)
-
