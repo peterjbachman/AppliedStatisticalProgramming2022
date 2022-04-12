@@ -3,4 +3,6 @@
 export(estimatePois)
 export(logLik)
 export(mle)
+export(plotPois)
 export(standardError)
+exportMethods(plotPois)
