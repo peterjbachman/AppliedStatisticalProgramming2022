@@ -27,10 +27,11 @@ setGeneric("plotPois", function(object) standardGeneric("plotPois"))
 
 #' @export
 setMethod("plotPois", "PoisMLE", function(object) {
+
+  # create objects for plotting confidence interval
   x <- 0
   y <- object@MLE
   se <- object@SE
-
   upper <- object@MLE + se * 1.96
   lower <- object@MLE - se * 1.96
 
@@ -43,6 +44,7 @@ setMethod("plotPois", "PoisMLE", function(object) {
     ylab = "Maximum Likelihood Estimate",
     main = "MLE and 95% confidence intervals"
   )
+  # graph horizontal line
   graphics::arrows(
     x0 = 0,
     x1 = 0,
@@ -50,6 +52,7 @@ setMethod("plotPois", "PoisMLE", function(object) {
     y1 = lower,
     length = 0
   )
+  # upper bound
   graphics::arrows(
     x0 = -0.25,
     x1 = 0.25,
@@ -57,6 +60,7 @@ setMethod("plotPois", "PoisMLE", function(object) {
     y1 = upper,
     length = 0
   )
+  # lower bound
   graphics::arrows(
     x0 = -0.25,
     x1 = 0.25,
