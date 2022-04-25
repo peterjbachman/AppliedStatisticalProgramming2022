@@ -11,8 +11,8 @@
 #' stop.
 #'
 #' @export
-rCppEBMA <- function(x, y, weights, sd, tolerance) {
-    .Call(`_ebmaRcpp_rCppEBMA`, x, y, weights, sd, tolerance)
+rcppEBMA <- function(x, y, weights, sd, tolerance) {
+    .Call(`_ebmaRcpp_rcppEBMA`, x, y, weights, sd, tolerance)
 }
 
 #' Compute the adjusted weights

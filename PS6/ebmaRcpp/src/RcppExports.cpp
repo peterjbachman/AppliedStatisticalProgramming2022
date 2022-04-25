@@ -10,9 +10,9 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// rCppEBMA
-NumericVector rCppEBMA(NumericMatrix x, NumericVector y, NumericVector weights, double sd, double tolerance);
-RcppExport SEXP _ebmaRcpp_rCppEBMA(SEXP xSEXP, SEXP ySEXP, SEXP weightsSEXP, SEXP sdSEXP, SEXP toleranceSEXP) {
+// rcppEBMA
+NumericVector rcppEBMA(NumericMatrix x, NumericVector y, NumericVector weights, double sd, double tolerance);
+RcppExport SEXP _ebmaRcpp_rcppEBMA(SEXP xSEXP, SEXP ySEXP, SEXP weightsSEXP, SEXP sdSEXP, SEXP toleranceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -21,7 +21,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
     Rcpp::traits::input_parameter< double >::type sd(sdSEXP);
     Rcpp::traits::input_parameter< double >::type tolerance(toleranceSEXP);
-    rcpp_result_gen = Rcpp::wrap(rCppEBMA(x, y, weights, sd, tolerance));
+    rcpp_result_gen = Rcpp::wrap(rcppEBMA(x, y, weights, sd, tolerance));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -52,7 +52,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ebmaRcpp_rCppEBMA", (DL_FUNC) &_ebmaRcpp_rCppEBMA, 5},
+    {"_ebmaRcpp_rcppEBMA", (DL_FUNC) &_ebmaRcpp_rcppEBMA, 5},
     {"_ebmaRcpp_wHat", (DL_FUNC) &_ebmaRcpp_wHat, 1},
     {"_ebmaRcpp_zHat", (DL_FUNC) &_ebmaRcpp_zHat, 4},
     {NULL, NULL, 0}
