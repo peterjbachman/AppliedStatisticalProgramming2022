@@ -2,8 +2,8 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @export
-rCppEBMA <- function(xMatrix, yVector, weights, sd, iterations) {
-    .Call(`_ebmaRcpp_rCppEBMA`, xMatrix, yVector, weights, sd, iterations)
+rCppEBMA <- function(x, y, weights, sd, tolerance) {
+    .Call(`_ebmaRcpp_rCppEBMA`, x, y, weights, sd, tolerance)
 }
 
 #' @export

@@ -11,17 +11,17 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // rCppEBMA
-NumericMatrix rCppEBMA(NumericMatrix xMatrix, NumericVector yVector, NumericVector weights, double sd, int iterations);
-RcppExport SEXP _ebmaRcpp_rCppEBMA(SEXP xMatrixSEXP, SEXP yVectorSEXP, SEXP weightsSEXP, SEXP sdSEXP, SEXP iterationsSEXP) {
+NumericVector rCppEBMA(NumericMatrix x, NumericVector y, NumericVector weights, double sd, double tolerance);
+RcppExport SEXP _ebmaRcpp_rCppEBMA(SEXP xSEXP, SEXP ySEXP, SEXP weightsSEXP, SEXP sdSEXP, SEXP toleranceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type xMatrix(xMatrixSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type yVector(yVectorSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
     Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
     Rcpp::traits::input_parameter< double >::type sd(sdSEXP);
-    Rcpp::traits::input_parameter< int >::type iterations(iterationsSEXP);
-    rcpp_result_gen = Rcpp::wrap(rCppEBMA(xMatrix, yVector, weights, sd, iterations));
+    Rcpp::traits::input_parameter< double >::type tolerance(toleranceSEXP);
+    rcpp_result_gen = Rcpp::wrap(rCppEBMA(x, y, weights, sd, tolerance));
     return rcpp_result_gen;
 END_RCPP
 }

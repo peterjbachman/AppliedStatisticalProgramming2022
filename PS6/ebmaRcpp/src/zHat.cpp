@@ -5,8 +5,8 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 NumericMatrix zHat(NumericMatrix x, NumericVector y, NumericVector weights, double sd){
   int rows = x.nrow();
-  NumericMatrix dNormal(x);
-  NumericMatrix out(x);
+  NumericMatrix dNormal(x.nrow(), x.ncol());
+  NumericMatrix out(x.nrow(), x.ncol());
 
   for (int i = 0; i < x.nrow(); ++i) {
     for (int j = 0; j < x.ncol(); ++j) {
