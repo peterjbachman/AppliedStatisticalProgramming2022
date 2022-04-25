@@ -2,6 +2,7 @@
 #include "functions.hpp"
 using namespace Rcpp;
 
+//' Perform EBMA using C++
 //' @export
 // [[Rcpp::export]]
 NumericVector rCppEBMA(NumericMatrix x, NumericVector y, NumericVector weights, double sd, double tolerance){

@@ -1,6 +1,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+//' Compute the adjusted weights
 //' @export
 // [[Rcpp::export]]
 NumericVector wHat(NumericMatrix z) {

@@ -1,6 +1,8 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+//' Compute the predicted z-values
+//'
 //' @export
 // [[Rcpp::export]]
 NumericMatrix zHat(NumericMatrix x, NumericVector y, NumericVector weights, double sd){
