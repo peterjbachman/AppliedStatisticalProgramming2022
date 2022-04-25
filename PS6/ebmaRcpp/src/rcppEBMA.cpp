@@ -15,7 +15,7 @@ using namespace Rcpp;
 //'
 //' @export
 // [[Rcpp::export]]
-NumericVector rCppEBMA(NumericMatrix x, NumericVector y, NumericVector weights, double sd, double tolerance){
+NumericVector rcppEBMA(NumericMatrix x, NumericVector y, NumericVector weights, double sd, double tolerance){
 
   // Initialize variables
   bool threshold = FALSE;
