@@ -6,6 +6,9 @@
 \usage{
 wHat(z)
 }
+\arguments{
+\item{z}{matrix of the predicted z values}
+}
 \description{
 Compute the adjusted weights
 }

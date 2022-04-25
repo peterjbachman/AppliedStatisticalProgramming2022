@@ -6,6 +6,18 @@
 \usage{
 rCppEBMA(x, y, weights, sd, tolerance)
 }
+\arguments{
+\item{x}{Numeric Matrix of X values for the models}
+
+\item{y}{Actual values for each observation in a vector}
+
+\item{weights}{Vector of weights for each of the models}
+
+\item{sd}{Standard Deviation}
+
+\item{tolerance}{The level of change between iterations where the model will
+stop.}
+}
 \description{
 Perform EBMA using C++
 }

@@ -3,6 +3,11 @@ using namespace Rcpp;
 
 //' Compute the predicted z-values
 //'
+//' @param x Numeric Matrix of X values for the models
+//' @param y Actual values for each observation in a vector
+//' @param weights Vector of weights for each of the models
+//' @param sd Standard Deviation
+//'
 //' @export
 // [[Rcpp::export]]
 NumericMatrix zHat(NumericMatrix x, NumericVector y, NumericVector weights, double sd){

@@ -6,6 +6,15 @@
 \usage{
 zHat(x, y, weights, sd)
 }
+\arguments{
+\item{x}{Numeric Matrix of X values for the models}
+
+\item{y}{Actual values for each observation in a vector}
+
+\item{weights}{Vector of weights for each of the models}
+
+\item{sd}{Standard Deviation}
+}
 \description{
 Compute the predicted z-values
 }

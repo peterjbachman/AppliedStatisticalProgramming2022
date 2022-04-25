@@ -2,18 +2,34 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' Perform EBMA using C++
+#'
+#' @param x Numeric Matrix of X values for the models
+#' @param y Actual values for each observation in a vector
+#' @param weights Vector of weights for each of the models
+#' @param sd Standard Deviation
+#' @param tolerance The level of change between iterations where the model will
+#' stop.
+#'
 #' @export
 rCppEBMA <- function(x, y, weights, sd, tolerance) {
     .Call(`_ebmaRcpp_rCppEBMA`, x, y, weights, sd, tolerance)
 }
 
 #' Compute the adjusted weights
+#'
+#' @param z matrix of the predicted z values
+#'
 #' @export
 wHat <- function(z) {
     .Call(`_ebmaRcpp_wHat`, z)
 }
 
 #' Compute the predicted z-values
+#'
+#' @param x Numeric Matrix of X values for the models
+#' @param y Actual values for each observation in a vector
+#' @param weights Vector of weights for each of the models
+#' @param sd Standard Deviation
 #'
 #' @export
 zHat <- function(x, y, weights, sd) {

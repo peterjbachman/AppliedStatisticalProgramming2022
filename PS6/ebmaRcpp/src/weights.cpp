@@ -2,6 +2,9 @@
 using namespace Rcpp;
 
 //' Compute the adjusted weights
+//'
+//' @param z matrix of the predicted z values
+//'
 //' @export
 // [[Rcpp::export]]
 NumericVector wHat(NumericMatrix z) {
