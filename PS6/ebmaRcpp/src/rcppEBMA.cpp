@@ -4,16 +4,26 @@ using namespace Rcpp;
 
 //' @export
 // [[Rcpp::export]]
-NumericMatrix rCppEBMA(NumericMatrix xMatrix, NumericVector yVector, NumericVector weights, double sd, int iterations){
-  NumericMatrix w((iterations + 1), xMatrix.ncol());
-  w( 0 , _ ) = weights;
+NumericVector rCppEBMA(NumericMatrix x, NumericVector y, NumericVector weights, double sd, double tolerance){
 
-  for (int i = 0; i < iterations; ++i){
-    Rcout << "The value of xMatrix : " << xMatrix << "\n";
-    NumericVector wHats = w(i, _ );
-    NumericMatrix zHats = zHat(xMatrix, yVector, wHats, sd);
-    w((i + 1), _ ) = wHat(zHats);
+  bool threshold = FALSE;
+  int iterations = 0;
+
+  while (threshold == FALSE){
+    NumericMatrix zHats = zHat(x, y, weights, sd);
+    NumericVector weightsNew = wHat(zHats);
+
+    LogicalVector test = ((weights - weightsNew) < tolerance);
+
+    if (is_true ( all(test) )) {
+      threshold = TRUE;
+    } else {
+      weights = weightsNew;
+    }
+
+    iterations = iterations + 1;
   }
 
-  return w;
+  Rcout << "The number of iterations to reach a tolerance of : " << tolerance << " is " << iterations << "\n";
+  return weights;
 }
