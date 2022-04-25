@@ -1,5 +1,7 @@
 #include <Rcpp.h>
 #include "functions.hpp"
+#include <iostream>
+#include <cmath>
 using namespace Rcpp;
 
 //' Perform EBMA using C++
@@ -15,14 +17,21 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 NumericVector rCppEBMA(NumericMatrix x, NumericVector y, NumericVector weights, double sd, double tolerance){
 
+  // Initialize variables
   bool threshold = FALSE;
   int iterations = 0;
 
   while (threshold == FALSE){
+    // Calculate zHat values
     NumericMatrix zHats = zHat(x, y, weights, sd);
     NumericVector weightsNew = wHat(zHats);
 
-    LogicalVector test = ((weights - weightsNew) < tolerance);
+    // See if the difference between the old weights and the newly calculated
+    // weights are less than the tolerance.
+    //
+    // IF all the weights fall below the tolerance, end the loop and print
+    // our the total number of iterations needed.
+    LogicalVector test = (abs((weights - weightsNew)) < tolerance);
 
     if (is_true ( all(test) )) {
       threshold = TRUE;

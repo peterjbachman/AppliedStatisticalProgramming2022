@@ -11,10 +11,13 @@ using namespace Rcpp;
 //' @export
 // [[Rcpp::export]]
 NumericMatrix zHat(NumericMatrix x, NumericVector y, NumericVector weights, double sd){
+
+  // Initialize variables
   int rows = x.nrow();
   NumericMatrix dNormal(x.nrow(), x.ncol());
   NumericMatrix out(x.nrow(), x.ncol());
 
+  // Calculate the dnorm() for each value in the matrix
   for (int i = 0; i < x.nrow(); ++i) {
     for (int j = 0; j < x.ncol(); ++j) {
       double datNumber = R::dnorm(y[i], x(i,j), sd, FALSE);
@@ -22,6 +25,8 @@ NumericMatrix zHat(NumericMatrix x, NumericVector y, NumericVector weights, doub
     }
   }
 
+  // Create row sums which is the sum of each row where every observation in the
+  // row is multiplied by the respective weight
   NumericVector sums(rows);
   for (int i = 0; i < rows; ++i) {
 
@@ -32,6 +37,8 @@ NumericMatrix zHat(NumericMatrix x, NumericVector y, NumericVector weights, doub
     sums[i] = rowSum;
   }
 
+  // Calculate the zHat values by multiplying the dnorm value by it's weight and
+  // then divide it by its respective sum.
   for (int i = 0; i < x.nrow(); ++i) {
     for (int j = 0; j < x.ncol(); ++j) {
       out(i,j) =  weights[j] * dNormal(i,j) / sums[i]; //
