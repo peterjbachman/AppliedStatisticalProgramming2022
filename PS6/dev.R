@@ -13,5 +13,3 @@ rCppEBMA(as.matrix(x), y, wHat, 1, 2)
 
 dnorm(44.5948, 0.0192778, 1, FALSE)
 
-for (i in 1:5)
-weightsNew <- rCppEBMA(as.matrix(attitude), y, weights, 5, tolerance = 0.005)
